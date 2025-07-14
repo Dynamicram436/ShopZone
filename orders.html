@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100&icon_names=favorite,home,search,settings"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close"
+    />
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <title>ShopZen</title>
+  </head>
+  <body>
+    <nav
+      class="bg-[#f9f9f9] h-screen fixed top-0 left-0 min-w-[250px] py-6 px-4 overflow-auto"
+    >
+      <i class="fa-solid fa-s bg-purple-500 text-white p-3 rounded-full"></i>
+      <span class="text-2xl font-semibold ml-2">ShopZen</span>
+
+      <div class="mt-6">
+        <div
+          onclick="showContent('section1')"
+          id="btn-home"
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-house"></i>
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            <span>Orders</span>
+          </h6>
+        </div>
+      </div>
+
+      <div class="mt-6" onclick="showContent('section2')" id="btn-orders">
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-truck-fast"></i>
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            <span>Orders</span>
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all rotate-90"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-[500px] overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Drafts</span>
+          </li>
+
+          <li>
+            <span>Shipping labels</span>
+          </li>
+          <li>
+            <span>Abandoned Checkouts</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6" onclick="showContent('section3')" id="btn-products">
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-tag"></i>
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Products
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6" onclick="showContent('section4')" id="btn-customers">
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-user"></i>
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Customers
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6" onclick="showContent('section5')" id="btn-content">
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-newspaper"></i>
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Content
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6" onclick="showContent('section6')" id="btn-finance">
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-sack-dollar"></i>
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Finance
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6" onclick="showContent('section7')" id="btn-analytics">
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-square-poll-vertical"></i>
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Analytics
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6" onclick="showContent('section8')" id="btn-marketing">
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-bullhorn"></i>
+
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Marketing
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6" onclick="showContent('section9')" id="btn-discounts">
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-tag"></i>
+
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Discounts
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="my-6 border-slate-200 dark:border-slate-700" />
+
+      <h2 class="text-slate-800 font-semibold text-base">Sales Channels</h2>
+
+      <div
+        class="mt-6"
+        onclick="showContent('section10')"
+        id="btn-online-store"
+      >
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-store"></i>
+
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Online Store
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="mt-6"
+        onclick="showContent('section11')"
+        id="btn-point-of-sale"
+      >
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-cube"></i>
+
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Point of Sale
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6" onclick="showContent('section12')" id="btn-shop">
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-cart-shopping"></i>
+
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Shop
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="my-6 border-slate-200 dark:border-slate-700" />
+
+      <h2 class="text-slate-800 font-semibold text-base">Apps</h2>
+
+      <div class="mt-6" onclick="showContent('section13')" id="btn-add-apps">
+        <div
+          class="flex items-center cursor-pointer group collapsible-toggle hover:bg-purple-100 rounded-md px-4 py-2 hover:text-purple-600 transition-all"
+        >
+          <i class="fa-solid fa-square-plus"></i>
+
+          <h6
+            class="text-slate-800 group-hover:text-slate-900 text-[15px] font-semibold px-4 flex-1 hover:text-purple-600 transition-all"
+          >
+            Add Apps
+          </h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-3 h-3 fill-slate-800 group-hover:fill-slate-900 transition-all"
+            viewBox="0 0 492.004 492.004"
+          >
+            <path
+              d="M382.678 226.804 163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
+              data-original="#000000"
+            />
+          </svg>
+        </div>
+
+        <ul
+          class="space-y-5 mt-2 pl-5 max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <li>
+            <span>Earnings and taxes</span>
+          </li>
+          <li>
+            <span>Refunds</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-4" onclick="showContent('section14')" id="btn-settings">
+        <ul class="space-y-4 px-2">
+          <li>
+            <a
+              href="javascript:void(0)"
+              class="text-slate-800 text-sm flex items-center font-medium hover:text-blue-600 transition-all"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                l="currentColor"
+                class="w-4 h-4 mr-3"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M13.12 24h-2.24a1.498 1.498 0 0 1-1.486-1.32l-.239-1.876a9.45 9.45 0 0 1-1.374-.569l-1.494 1.161a1.492 1.492 0 0 1-1.985-.126l-1.575-1.575a1.488 1.488 0 0 1-.122-1.979l1.161-1.495a9.232 9.232 0 0 1-.569-1.374l-1.88-.239A1.501 1.501 0 0 1 0 13.12v-2.24c0-.757.567-1.396 1.32-1.486l1.876-.239a9.45 9.45 0 0 1 .569-1.374l-1.16-1.494a1.49 1.49 0 0 1 .127-1.986l1.575-1.575a1.489 1.489 0 0 1 1.979-.122L7.78 3.766a9.416 9.416 0 0 1 1.375-.569l.239-1.88C9.484.567 10.123 0 10.88 0h2.24c.757 0 1.396.567 1.486 1.32l.239 1.876c.478.155.938.346 1.375.569l1.494-1.161a1.49 1.49 0 0 1 1.985.127l1.575 1.575c.537.521.591 1.374.122 1.979L20.235 7.78c.224.437.415.897.569 1.374l1.88.239A1.5 1.5 0 0 1 24 10.88v2.24c0 .757-.567 1.396-1.32 1.486l-1.876.239a9.45 9.45 0 0 1-.569 1.374l1.161 1.494a1.49 1.49 0 0 1-.127 1.985l-1.575 1.575a1.487 1.487 0 0 1-1.979.122l-1.495-1.161a9.232 9.232 0 0 1-1.374.569l-.239 1.88A1.5 1.5 0 0 1 13.12 24zm-5.39-4.86c.083 0 .168.021.244.063a8.393 8.393 0 0 0 1.774.736.5.5 0 0 1 .358.417l.28 2.2c.03.251.247.444.494.444h2.24a.504.504 0 0 0 .493-.439l.281-2.204a.5.5 0 0 1 .358-.417 8.393 8.393 0 0 0 1.774-.736.499.499 0 0 1 .55.042l1.75 1.36a.492.492 0 0 0 .655-.034l1.585-1.585a.495.495 0 0 0 .039-.66l-1.36-1.75a.5.5 0 0 1-.042-.55 8.393 8.393 0 0 0 .736-1.774.5.5 0 0 1 .417-.358l2.2-.28A.507.507 0 0 0 23 13.12v-2.24a.504.504 0 0 0-.439-.493l-2.204-.281a.5.5 0 0 1-.417-.358 8.393 8.393 0 0 0-.736-1.774.497.497 0 0 1 .042-.55l1.36-1.75a.49.49 0 0 0-.033-.654l-1.585-1.585a.492.492 0 0 0-.66-.039l-1.75 1.36a.5.5 0 0 1-.551.042 8.359 8.359 0 0 0-1.774-.736.5.5 0 0 1-.358-.417l-.28-2.2A.507.507 0 0 0 13.12 1h-2.24a.504.504 0 0 0-.493.439l-.281 2.204a.502.502 0 0 1-.358.418 8.356 8.356 0 0 0-1.774.735.5.5 0 0 1-.551-.041l-1.75-1.36a.49.49 0 0 0-.654.033L3.434 5.014a.495.495 0 0 0-.039.66l1.36 1.75a.5.5 0 0 1 .042.55 8.341 8.341 0 0 0-.736 1.774.5.5 0 0 1-.417.358l-2.2.28A.505.505 0 0 0 1 10.88v2.24c0 .247.193.464.439.493l2.204.281a.5.5 0 0 1 .417.358c.18.626.428 1.223.736 1.774a.497.497 0 0 1-.042.55l-1.36 1.75a.49.49 0 0 0 .033.654l1.585 1.585a.494.494 0 0 0 .66.039l1.75-1.36a.515.515 0 0 1 .308-.104z"
+                  data-original="#000000"
+                />
+                <path
+                  d="M12 17c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5zm0-9c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z"
+                  data-original="#000000"
+                />
+              </svg>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Dashboard Starts here ==== -->
+
+    <!-- Home Section ==== -->
+    <section class="ml-0">
+      >
+      <section class="flex-grow p-5" id="content-area">
+        <main
+          id="section1"
+          class="flex-1 p-6 bg-slate-50 dark:bg-slate-900 ml-64 content-section"
+        >
+          <h1 class="text-2xl font-semibold text-slate-800 dark:text-slate-200">
+            Welcome to ShopZone
+          </h1>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">
+            Manage your store efficiently with our comprehensive dashboard.
+          </p>
+        </main>
+      </section>
+
+      <!-- Orders Section ==== -->
+      <header
+        class="relative content-section hidden"
+        id="section2"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <form class="ml-0 w-full max-w-xl">
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+            ></div>
+            <input
+              type="search"
+              id="default-search"
+              class="block w-full p-4 ps-10 text-sm text-gray-500 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Search orders..."
+            />
+          </div>
+
+          <div class="flex items-center gap-4 absolute right-5 top-0">
+            <i class="fa-solid fa-bell p-5 text-2xl"></i>
+            <img
+              class="w-10 h-10 rounded-full"
+              src="/images/64.jpg"
+              alt="Profile Picture"
+            />
+          </div>
+
+          <div class="mt-6 flex justify-around items-center">
+            <!-- Left side: Heading -->
+            <h1 class="text-2xl font-semibold text-black">Orders</h1>
+
+            <!-- Right side: Buttons and select -->
+            <div class="flex justify-end items-center gap-4">
+              <button
+                class="bg-white border border-gray-300 text-black px-4 py-2 rounded-lg"
+              >
+                <i class="fa-solid fa-file-export pr-2"></i>Export
+              </button>
+
+              <select
+                class="border border-gray-300 rounded-lg p-2 w-40 cursor-pointer"
+              >
+                <option value="">More Actions</option>
+                <option value="">Print</option>
+                <option value="">Export</option>
+                <option value="">Delete</option>
+              </select>
+
+              <!-- <button class="bg-purple-500 text-white px-4 py-2 rounded-lg">
+              Create Order
+             </button> -->
+              <button
+                data-modal-target="crud-modal"
+                data-modal-toggle="crud-modal"
+                class="block text-white bg-purple-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button"
+              >
+                Create Order
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <input
+              type="date"
+              class="border border-gray-300 rounded-lg p-2 w-1/2"
+              onclick="this.showPicker()"
+            />
+          </div>
+        </form>
+
+        <section class="mt-6 grid grid-cols-3 gap-4 items-center mx-auto">
+          <div
+            class="max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-800 p-4 md:p-6"
+          >
+            <div class="flex justify-between">
+              <div>
+                <h1 class="text-lg font-semibold text-gray-900 dark:text-white">
+                  Total Orders
+                </h1>
+                <h5
+                  class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2"
+                >
+                  21
+                </h5>
+                <p
+                  class="text-base font-normal text-gray-500 dark:text-gray-400"
+                >
+                  Last week
+                </p>
+              </div>
+              <div
+                class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center"
+              >
+                25.2%
+                <svg
+                  class="w-3 h-3 ms-1"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13V1m0 0L1 5m4-4 4 4"
+                  />
+                </svg>
+              </div>
+            </div>
+            <!-- <div id="area-chart"></div> -->
+          </div>
+
+          <div
+            class="max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-800 p-4 md:p-6"
+          >
+            <div class="flex justify-between">
+              <div>
+                <h1 class="text-lg font-semibold text-gray-900 dark:text-white">
+                  Orders items over time
+                </h1>
+                <h5
+                  class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2"
+                >
+                  15
+                </h5>
+                <p
+                  class="text-base font-normal text-gray-500 dark:text-gray-400"
+                >
+                  Last week
+                </p>
+              </div>
+              <div
+                class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center"
+              >
+                18.2%
+                <svg
+                  class="w-3 h-3 ms-1"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13V1m0 0L1 5m4-4 4 4"
+                  />
+                </svg>
+              </div>
+            </div>
+            <!-- <div id="area-chart"></div> -->
+          </div>
+
+          <div
+            class="max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-800 p-4 md:p-6"
+          >
+            <div class="flex justify-between">
+              <div>
+                <h1 class="text-lg font-semibold text-gray-900 dark:text-white">
+                  Returns Orders
+                </h1>
+                <h5
+                  class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2"
+                >
+                  0
+                </h5>
+                <p
+                  class="text-base font-normal text-gray-500 dark:text-gray-400"
+                >
+                  Last week
+                </p>
+              </div>
+              <div
+                class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center"
+              >
+                -1.2%
+                <svg
+                  class="w-3 h-3 ms-1"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13V1m0 0L1 5m4-4 4 4"
+                  />
+                </svg>
+              </div>
+            </div>
+            <!-- <div id="area-chart"></div> -->
+          </div>
+        </section>
+
+        <!== Table Section ==== -->
+        <section class="bg-white dark:bg-gray-900 mt-10">
+          <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+            <ul
+              class="flex flex-wrap -mb-px text-sm font-medium text-center"
+              id="default-tab"
+              data-tabs-toggle="#default-tab-content"
+              role="tablist"
+            >
+              <li class="me-2" role="presentation">
+                <button
+                  class="inline-block p-4 border-b-2 rounded-t-lg"
+                  id="profile-tab"
+                  data-tabs-target="#profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="profile"
+                  aria-selected="true"
+                >
+                  All
+                </button>
+              </li>
+              <li class="me-2" role="presentation">
+                <button
+                  class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                  id="dashboard-tab"
+                  data-tabs-target="#dashboard"
+                  type="button"
+                  role="tab"
+                  aria-controls="dashboard"
+                  aria-selected="false"
+                >
+                  Unfilled
+                </button>
+              </li>
+              <li class="me-2" role="presentation">
+                <button
+                  class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                  id="settings-tab"
+                  data-tabs-target="#settings"
+                  type="button"
+                  role="tab"
+                  aria-controls="settings"
+                  aria-selected="false"
+                >
+                  Unpaid
+                </button>
+              </li>
+              <li role="presentation">
+                <button
+                  class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                  id="contacts-tab"
+                  data-tabs-target="#contacts"
+                  type="button"
+                  role="tab"
+                  aria-controls="contacts"
+                  aria-selected="false"
+                >
+                  Open
+                </button>
+              </li>
+              <li role="presentation">
+                <button
+                  class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                  id="contacts-tab"
+                  data-tabs-target="#contacts"
+                  type="button"
+                  role="tab"
+                  aria-controls="contacts"
+                  aria-selected="false"
+                >
+                  Closed
+                </button>
+              </li>
+              <li role="presentation">
+                <button
+                  class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                  id="contacts-tab"
+                  data-tabs-target="#contacts"
+                  type="button"
+                  role="tab"
+                  aria-controls="contacts"
+                  aria-selected="false"
+                >
+                  <span>
+                    <i
+                      class="fa-solid fa-plus border-2 p-0 rounded-lg"
+                    ></i> </span
+                  >Add
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div id="default-tab-content"></div>
+        </section>
+
+        <!-- Main modal -->
+        <div
+          id="crud-modal"
+          tabindex="-1"
+          aria-hidden="true"
+          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        >
+          <div class="relative p-4 w-full max-w-md max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <!-- Modal header -->
+              <div
+                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+              >
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                  Create New Order
+                </h3>
+                <button
+                  type="button"
+                  class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  data-modal-toggle="crud-modal"
+                >
+                  <svg
+                    class="w-3 h-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 14"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                    />
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+                </button>
+              </div>
+              <!-- Modal body -->
+              <form class="p-4 md:p-5" id="order-form">
+                <div class="grid gap-4 mb-4 grid-cols-2">
+                  <div class="col-span-2">
+                    <label
+                      for="order-id"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Order ID</label
+                    >
+                    <input
+                      type="text"
+                      name="order-id"
+                      id="order-id"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="Order ID"
+                      required=""
+                    />
+                  </div>
+                  <div class="col-span-2">
+                    <label
+                      for="order-date"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Date</label
+                    >
+                    <input
+                      type="date"
+                      name="order-date"
+                      id="order-date"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      required=""
+                    />
+                  </div>
+                  <div class="col-span-2">
+                    <label
+                      for="customer"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Customer</label
+                    >
+                    <input
+                      type="text"
+                      name="customer"
+                      id="customer"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="Customer Name"
+                      required=""
+                    />
+                  </div>
+                  <div class="col-span-2 sm:col-span-1">
+                    <label
+                      for="payment"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Payment</label
+                    >
+                    <select
+                      id="payment"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    >
+                      <option value="">Select payment status</option>
+                      <option value="Paid">Paid</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Refunded">Refunded</option>
+                    </select>
+                  </div>
+                  <div class="col-span-2 sm:col-span-1">
+                    <label
+                      for="total"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Total</label
+                    >
+                    <input
+                      type="number"
+                      name="total"
+                      id="total"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="$299"
+                      required=""
+                    />
+                  </div>
+                  <div class="col-span-2">
+                    <label
+                      for="delivery"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Delivery</label
+                    >
+                    <select
+                      id="delivery"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    >
+                      <option value="">Select delivery status</option>
+                      <option value="Delivered">Delivered</option>
+                      <option value="In Transit">In Transit</option>
+                      <option value="Pending">Pending</option>
+                    </select>
+                  </div>
+                  <div class="col-span-2">
+                    <label
+                      for="items"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Items</label
+                    >
+                    <textarea
+                      id="items"
+                      rows="4"
+                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="List items, e.g., 2x T-shirt, 1x Jeans"
+                    ></textarea>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+          <table
+            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            id="orders-table"
+          >
+            <thead
+              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+            >
+              <tr>
+                <th scope="col" class="px-6 py-3">Order ID</th>
+                <th scope="col" class="px-6 py-3">Date</th>
+                <th scope="col" class="px-6 py-3">Customer</th>
+                <th scope="col" class="px-6 py-3">Payment</th>
+                <th scope="col" class="px-6 py-3">Total</th>
+                <th scope="col" class="px-6 py-3">Delivery</th>
+                <th scope="col" class="px-6 py-3">Items</th>
+                <th scope="col" class="px-6 py-3">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Order rows will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </header>
+
+      <!-- Products Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section3"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Products</h1>
+        <p class="text-slate-600 mt-2">Manage your products here.</p>
+      </section>
+
+      <!-- Customers Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section4"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Customers</h1>
+        <p class="text-slate-600 mt-2">View and manage your customer base.</p>
+      </section>
+
+      <!-- Content Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section5"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Content</h1>
+        <p class="text-slate-600 mt-2">Manage your store's content.</p>
+      </section>
+
+      <!-- Finance Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section6"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Finance</h1>
+        <p class="text-slate-600 mt-2">Track your financial data.</p>
+      </section>
+
+      <!-- Analytics Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section7"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Analytics</h1>
+        <p class="text-slate-600 mt-2">
+          View your store's performance analytics.
+        </p>
+      </section>
+
+      <!-- Marketing Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section8"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Marketing</h1>
+        <p class="text-slate-600 mt-2">Manage your marketing campaigns.</p>
+      </section>
+
+      <!-- Discounts Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section9"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Discounts</h1>
+        <p class="text-slate-600 mt-2">Create and manage discounts.</p>
+      </section>
+
+      <!-- Online Store Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section10"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Online Store</h1>
+        <p class="text-slate-600 mt-2">Manage your online storefront.</p>
+      </section>
+
+      <!-- Point of Sale Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section11"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Point of Sale</h1>
+        <p class="text-slate-600 mt-2">Manage your point of sale system.</p>
+      </section>
+
+      <!-- Shop Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section12"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Shop</h1>
+        <p class="text-slate-600 mt-2">Manage your shop settings.</p>
+      </section>
+
+      <!-- Add Apps Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section13"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Add Apps</h1>
+        <p class="text-slate-600 mt-2">Integrate new applications.</p>
+      </section>
+
+      <!-- Settings Section -->
+      <section
+        class="flex-grow p-5 content-section hidden"
+        id="section14"
+        style="margin-left: 250px; padding: 20px"
+      >
+        <h1 class="text-2xl font-bold text-slate-800">Settings</h1>
+        <p class="text-slate-600 mt-2">Configure your store settings.</p>
+      </section>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".collapsible-toggle").forEach((toggle) => {
+          toggle.addEventListener("click", () => {
+            const menu = toggle.nextElementSibling; // The <ul> element
+            const arrow = toggle.querySelector(".arrow"); // The SVG arrow
+
+            if (menu && arrow) {
+              // Ensure both elements exist
+              // Check if the menu is currently open
+              const isOpen =
+                menu.style.maxHeight && menu.style.maxHeight !== "0px";
+
+              if (isOpen) {
+                // Close the menu
+                menu.style.maxHeight = "0px";
+                arrow.classList.remove("rotate-90");
+              } else {
+                // Open the menu
+                menu.style.maxHeight = menu.scrollHeight + "px";
+                arrow.classList.add("rotate-90");
+              }
+            }
+          });
+        });
+      });
+
+      function showContent(section) {
+        const sections = document.querySelectorAll(".content-section");
+        const toggles = document.querySelectorAll(".collapsible-toggle");
+
+        // Hide all sections
+        sections.forEach((sec) => sec.classList.add("hidden"));
+
+        // Remove highlight from all sidebar items (collapsible-toggle)
+        toggles.forEach((item) =>
+          item.classList.remove("bg-purple-100", "text-purple-600")
+        );
+
+        // Show selected section
+        const targetSection = document.getElementById(section);
+        if (targetSection) targetSection.classList.remove("hidden");
+
+        // Highlight the clicked sidebar item
+        const sidebarItem = document.querySelector(
+          `#btn-${section} .collapsible-toggle`
+        );
+        if (sidebarItem)
+          sidebarItem.classList.add("bg-purple-100", "text-purple-600");
+      }
+
+      window.addEventListener("DOMContentLoaded", (event) => {
+        const options = {
+          chart: {
+            height: 300,
+            type: "area",
+            fontFamily: "Inter, sans-serif",
+            dropShadow: {
+              enabled: false,
+            },
+            toolbar: {
+              show: false,
+            },
+          },
+          tooltip: {
+            enabled: true,
+            x: {
+              show: false,
+            },
+          },
+          fill: {
+            type: "gradient",
+            gradient: {
+              opacityFrom: 0.55,
+              opacityTo: 0,
+              shade: "#1C64F2",
+              gradientToColors: ["#1C64F2"],
+            },
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          stroke: {
+            width: 6,
+          },
+          grid: {
+            show: false,
+            strokeDashArray: 4,
+            padding: {
+              left: 2,
+              right: 2,
+              top: 0,
+            },
+          },
+          series: [
+            {
+              name: "New users",
+              data: [6500, 6418, 6456, 6526, 6356, 6456, 6500],
+              color: "#1A56DB",
+            },
+          ],
+          xaxis: {
+            categories: [
+              "01 February",
+              "02 February",
+              "03 February",
+              "04 February",
+              "05 February",
+              "06 February",
+              "07 February",
+            ],
+            labels: {
+              show: false,
+            },
+            axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
+            },
+          },
+          yaxis: {
+            show: false,
+          },
+        };
+
+        if (
+          document.getElementById("area-chart") &&
+          typeof ApexCharts !== "undefined"
+        ) {
+          const chart = new ApexCharts(
+            document.getElementById("area-chart"),
+            options
+          );
+          chart.render();
+        }
+      });
+
+      const renderOrders = () => {
+        const ordersTableBody = document.querySelector("#orders-table tbody");
+        ordersTableBody.innerHTML = ""; // Clear existing rows
+
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders.forEach((order, index) => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+        <td class="px-6 py-4">${order.orderId}</td>
+        <td class="px-6 py-4">${order.orderDate}</td>
+        <td class="px-6 py-4">${order.customer}</td>
+        <td class="px-6 py-4">${order.payment}</td>
+        <td class="px-6 py-4">$${order.total}</td>
+        <td class="px-6 py-4">${order.delivery}</td>
+        <td class="px-6 py-4">${order.items}</td>
+        <td class="px-6 py-4">
+          <button onclick="deleteOrder(${index})" class="text-red-500 hover:underline">Delete</button>
+        </td>
+      `;
+
+          ordersTableBody.appendChild(row);
+        });
+      };
+
+      // Function to save data from the form to localStorage
+      const saveOrder = (event) => {
+        event.preventDefault();
+
+        const orderId = document.querySelector("#order-id").value;
+        const orderDate = document.querySelector("#order-date").value;
+        const customer = document.querySelector("#customer").value;
+        const payment = document.querySelector("#payment").value;
+        const total = document.querySelector("#total").value;
+        const delivery = document.querySelector("#delivery").value;
+        const items = document.querySelector("#items").value;
+
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders.push({
+          orderId,
+          orderDate,
+          customer,
+          payment,
+          total,
+          delivery,
+          items,
+        });
+        localStorage.setItem("orders", JSON.stringify(orders));
+
+        document.querySelector("#order-form").reset(); // Reset the form
+        document.querySelector("#crud-modal").classList.add("hidden"); // Close the modal
+
+        renderOrders(); // Re-render orders table
+      };
+
+      // Function to delete an order
+      const deleteOrder = (index) => {
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders.splice(index, 1); // Remove the order at the given index
+        localStorage.setItem("orders", JSON.stringify(orders));
+
+        renderOrders(); // Re-render orders table
+      };
+
+      // Attach the saveOrder function to the form submit event
+      document
+        .querySelector("#order-form")
+        .addEventListener("submit", saveOrder);
+
+      // Render orders when the page loads
+      document.addEventListener("DOMContentLoaded", renderOrders);
+    </script>
+  </body>
+</html>
